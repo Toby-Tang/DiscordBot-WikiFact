@@ -62,5 +62,5 @@ def WikiFact(list_tables):
 
     p_title = (title.text.strip())
     p_comment = (comment.text.strip())
-    p_link = (f"{link}\n")
+    p_link = (f"https://en.wikipedia.org{link}\n") #remove https://en.wikipedia.org if pasring from html file
     return p_title,p_comment,p_link
