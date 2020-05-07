@@ -11,29 +11,19 @@ import requests
 import random
 from bs4 import BeautifulSoup
 
-
-def table_compiler():
+def WikiFact():
     #With internet access 
     URL = 'https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles'
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    # #with downloaded html file
-    # with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
-    #     data = f.read()
-    #     soup = BeautifulSoup(data, 'html.parser')
-
     #Find content section
     content = soup.find(id='content')
     #Find all the tables
     wikitables = content.find_all('table', class_='wikitable')
-    return(wikitables)
 
-
-
-def WikiFact(list_tables):
     #choose a random table
-    table_elems = random.choice(list_tables)
+    table_elems = random.choice(wikitables)
         #find all articles within this table
     article_elems = table_elems.find_all('tr') 
 
@@ -55,11 +45,11 @@ def WikiFact(list_tables):
             #acquire link from <a></a>
     link = title_elem.find('a')['href']
 
-    # print(title.text.strip())
-    # print(comment.text.strip())
-    # print(f"https://en.wikipedia.org{link}\n")
+    print(title.text.strip())
+    print(comment.text.strip())
+    print(f"https://en.wikipedia.org{link}\n")
 
     p_title = (title.text.strip())
     p_comment = (comment.text.strip())
-    p_link = (f"{link}\n")
+    p_link = (f"https://en.wikipedia.org{link}\n")
     return p_title,p_comment,p_link
