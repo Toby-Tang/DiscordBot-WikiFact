@@ -14,21 +14,21 @@ from bs4 import BeautifulSoup
 
 def table_compiler():
     #With internet access 
-    # URL = 'https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles'
-    # page = requests.get(URL)
-    # soup = BeautifulSoup(page.content, 'html.parser')
+    URL = 'https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles'
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, 'html.parser')
 
     #with downloaded html file
-    with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
-        data = f.read()
-        soup = BeautifulSoup(data, 'html.parser')
+    #with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
+    #    data = f.read()
+    #    soup = BeautifulSoup(data, 'html.parser')
 
 
-        #Find content section
-        content = soup.find(id='content')
-        #Find all the tables
-        wikitables = content.find_all('table', class_='wikitable')
-        return(wikitables)
+    #Find content section
+    content = soup.find(id='content')
+    #Find all the tables
+    wikitables = content.find_all('table', class_='wikitable')
+    return(wikitables)
 
 
 
