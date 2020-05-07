@@ -27,7 +27,11 @@ async def on_message(message):
         return
 
     good_commands = ['!factme']
+<<<<<<< HEAD
     good_response = ['FACT TIME BABY', 'FACT\'in right!', 'Hit\'ya with my best FACT!', 'Gimme a FACT\'in second!','FACT servers be slow today...','Yawn* What now? Ah FACT, right.']
+=======
+    good_response = ['FACT TIME BABY', 'Hit\'ya with my best FACT!', 'Gimme a second!','FACT servers be slow today...','Yawn* What now? Ah FACT, right.']
+>>>>>>> b81437fcd6ec5a29b20f347475ef7dacf2d1f939
 
     if (message.content in good_commands):
         await message.channel.send(random.choice(good_response) + ' searchin\'...')

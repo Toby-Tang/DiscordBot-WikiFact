@@ -18,11 +18,20 @@ def table_compiler():
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
 
+<<<<<<< HEAD
     # #with downloaded html file
     # with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
     #     data = f.read()
     #     soup = BeautifulSoup(data, 'html.parser')
 
+=======
+    #with downloaded html file
+    #with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
+    #    data = f.read()
+    #    soup = BeautifulSoup(data, 'html.parser')
+
+
+>>>>>>> b81437fcd6ec5a29b20f347475ef7dacf2d1f939
     #Find content section
     content = soup.find(id='content')
     #Find all the tables
@@ -61,5 +70,5 @@ def WikiFact(list_tables):
 
     p_title = (title.text.strip())
     p_comment = (comment.text.strip())
-    p_link = (f"{link}\n")
+    p_link = (f"https://en.wikipedia.org{link}\n") #remove https://en.wikipedia.org if pasring from html file
     return p_title,p_comment,p_link
