@@ -26,18 +26,13 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    good_commands = ['!factme', '!facme' ]
-    bad_commands = ['!fuckme', '!fuckyou']
-    good_response = ['FAC TIME BABY', 'FAC\'in right!', 'Hit\'ya with my best FAC!', 'Gimme a FAC\'in second!','FAC servers be slow today...','Yawn* What now? Ah FAC, right.']
-    bad_response = ['!fuckyoutoo','!dontmakemefacu']
+    good_commands = ['!factme']
+    good_response = ['FACT TIME BABY', 'Hit\'ya with my best FACT!', 'Gimme a second!','FACT servers be slow today...','Yawn* What now? Ah FACT, right.']
 
     if (message.content in good_commands):
         await message.channel.send(random.choice(good_response) + ' searchin\'...')
         p_title,p_comment,p_link = WikiFact(list_tables)
         await message.channel.send('**' + p_title + ':** ' + p_comment)
         await message.channel.send(p_link)
-
-    if (message.content in bad_commands):
-        await message.channel.send(random.choice(bad_response))
 	
 client.run(TOKEN)
