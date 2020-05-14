@@ -18,20 +18,11 @@ def table_compiler():
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
 
-<<<<<<< HEAD
     # #with downloaded html file
     # with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
     #     data = f.read()
     #     soup = BeautifulSoup(data, 'html.parser')
 
-=======
-    #with downloaded html file
-    #with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
-    #    data = f.read()
-    #    soup = BeautifulSoup(data, 'html.parser')
-
-
->>>>>>> b81437fcd6ec5a29b20f347475ef7dacf2d1f939
     #Find content section
     content = soup.find(id='content')
     #Find all the tables
