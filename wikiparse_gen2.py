@@ -1,10 +1,19 @@
 # ===========================================================
-# NAME: Wikipedia Unusual Articles- Webscrapper
+# NAME: Wikipedia Unusual Articles- Wikiparse
 # BY: Toby Tang 
-# DATE: MAY 2, 2020
+# DATE: MAY 14, 2020
 #
-# -Scrapes website for tables containing articles
-# and returns random article with name, link and comment
+# Written in Python, the algorithm accesses the web to import 
+# the Wikipedia Unusual Articles page in HTML using the requests 
+# library. The HTML data can then be parsed using the BeautifulSoup 
+# library to obtain a list of articles. This list is only generated 
+# once upon start up, not each time the bot is called. This is done 
+# to minimize bot response time. A random python function is then 
+# used to select an article. The chosen article will then be parsed 
+# one last time to obtain the title, description and link. 
+# 
+# Discord bot link: https://top.gg/bot/704890634984751126
+# Github: https://github.com/Toby-Tang/DiscordBot-WikiFact
 # ===========================================================
 
 import requests
@@ -12,43 +21,45 @@ import random
 from bs4 import BeautifulSoup
 
 
-def table_compiler():
+def article_compiler():
     #With internet access 
     URL = 'https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles'
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
+    list_articles = []
 
-    # #with downloaded html file
-    # with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
-    #     data = f.read()
-    #     soup = BeautifulSoup(data, 'html.parser')
+    #with downloaded html file
+    #with open("Wikipedia_Unusual.html", encoding="utf-8") as f:
+    #    data = f.read()
+    #    soup = BeautifulSoup(data, 'html.parser')
+
 
     #Find content section
     content = soup.find(id='content')
     #Find all the tables
     wikitables = content.find_all('table', class_='wikitable')
-    return(wikitables)
+    #Find all the articles
+    for table_elems in wikitables:
+        list_articles.extend(table_elems.find_all('tr'))
+
+    print(f'Article list length: {len(list_articles)}')
+    #return compiled list
+    return(list_articles)
 
 
 
-def WikiFact(list_tables):
-    #choose a random table
-    table_elems = random.choice(list_tables)
-        #find all articles within this table
-    article_elems = table_elems.find_all('tr') 
-
-    # #choose a random article
+def WikiFact(article_elems):
+    #choose a random article
     article = random.choice(article_elems)
-        #find all the table cells of the article
+    #find all the table cells of the article
     td_elems = article.find_all('td')
-    ##print(article)
 
-    #DEV_NOTE: had to start from last cells because
-    #some tables have 3 cells with unique first cell. eg flags.
+    #DEV_NOTE: started from last cell because
+    #some articles have 3 cells with a unique first cell. eg flags
 
-        #last cell is always the comment
+    #last cell is always the comment
     comment = td_elems[-1]
-        #second last cell is always the title w/ link
+    #second last cell is always the title w/ link
     title_elem = td_elems[-2]
             #acquire text from <b></b>
     title = title_elem.find('b')

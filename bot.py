@@ -1,4 +1,15 @@
-# bot.py
+# ===========================================================
+# NAME: Wikipedia Unusual Articles- bot.py
+# BY: Toby Tang 
+# Last Update: MAY 14, 2020
+#
+# Integrates discord interface with webscrapping code. Once
+# the bot is added to a server, command '!factme' will return
+# a random Wikipedia Unusual Articles page article.
+# 
+# Discord bot link: https://top.gg/bot/704890634984751126
+# Github: https://github.com/Toby-Tang/DiscordBot-WikiFact
+# ===========================================================
 import os
 import random
 import discord
@@ -9,7 +20,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 client = discord.Client()
-list_tables = table_compiler()
+list_articles = article_compiler()
 
 @client.event
 async def on_ready():
@@ -27,11 +38,11 @@ async def on_message(message):
         return
 
     good_commands = ['!factme']
-    good_response = ['FACT TIME BABY', 'FACT\'in right!', 'Hit\'ya with my best FACT!', 'Gimme a FACT\'in second!','FACT servers be slow today...','Yawn* What now? Ah FACT, right.']
+    good_response = ['FACT TIME BABY', 'Hit\'ya with my best FACT!', 'Gimme a second!','FACT servers be slow today...','Yawn* What now? Ah FACT, right.']
 
     if (message.content in good_commands):
         await message.channel.send(random.choice(good_response) + ' searchin\'...')
-        p_title,p_comment,p_link = WikiFact(list_tables)
+        p_title,p_comment,p_link = WikiFact(list_articles)
         await message.channel.send('**' + p_title + ':** ' + p_comment)
         await message.channel.send(p_link)
 	
