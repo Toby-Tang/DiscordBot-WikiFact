@@ -36,6 +36,9 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
+    
+    if message.author.bot:
+        return
 
     good_commands = ['!factme']
     good_response = ['FACT TIME BABY', 'Hit\'ya with my best FACT!', 'Gimme a second!','FACT servers be slow today...','Yawn* What now? Ah FACT, right.']
