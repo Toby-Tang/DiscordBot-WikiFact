@@ -24,6 +24,8 @@ list_articles = article_compiler()
 
 @client.event
 async def on_ready():
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for facts"))
+
     guild = discord.utils.get(client.guilds, name=GUILD)
     print(
         f'{client.user} is connected to the following guild:\n'
